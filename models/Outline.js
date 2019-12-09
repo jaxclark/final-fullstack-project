@@ -9,7 +9,12 @@ const outlineSchema = new Schema({
     partFour: String,
     partFive: String,
     partSix: String,
-    partSeven: String
+    partSeven: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Outline', outlineSchema);

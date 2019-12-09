@@ -10,7 +10,12 @@ const storySchema = new Schema({
         type: String,
         enum: ['Crime', 'Mystery', 'Fantasy', 'Romance', 'Science Fiction', 'Western', 'Horror', 'Inspirational', 'Non-Fiction', 'Biography']
     },
-    summary: String
+    summary: String,
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Story', storySchema);
