@@ -12,6 +12,7 @@ outlineRouter.route('/')
             return res.send(outlines)
         })
     })
+
     .post((req, res, next) => {
         const outline = new Outline(req.body);
         outline.user = req.user._id;
@@ -23,6 +24,17 @@ outlineRouter.route('/')
             return res.status(201).send(newOutline);
         });
     });
+
+outlineRouter.route('/:storyId')
+    .get((req, res, next) => {
+        Outline.find({ story: req.params.storyId, user: req.user._id }, (err, outlines) => {
+            if(err) {
+                res.status(500);
+                return next(err)
+            }
+            return res.send(outlines)
+        })
+    })
 
 outlineRouter.route('/:outlineId')
     .get((req, res, next) => {

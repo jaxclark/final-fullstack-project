@@ -14,6 +14,11 @@ const outlineSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User",
         required: true
+    },
+    story: {
+        type: Schema.Types.ObjectId,
+        ref: 'Story',
+        required: true
     }
 })
 

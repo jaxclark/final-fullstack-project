@@ -9,11 +9,11 @@ storyRouter.route('/')
                 res.status(500);
                 return next(err);
             }
-            return res.status(story);
+            return res.send(story);
         })
     })
 
-    .post((req, rest, next) => {
+    .post((req, res, next) => {
         const story = new Story(req.body);
         story.user = req.user._id;
         story.save(function (err, newStory) {
@@ -21,7 +21,7 @@ storyRouter.route('/')
                 res.status(500);
                 return next(err);
             }
-            return res.status(201).send(newTodo);
+            return res.status(201).send(newStory);
         })
     })
 
