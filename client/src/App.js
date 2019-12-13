@@ -6,6 +6,8 @@ import Signup from './Auth/Signup'
 import Login from './Auth/Login'
 import ProtectedRoute from './Auth/ProtectedRoute'
 import LandingPage from './Profile/LandingPage'
+import StoriesPage from './Profile/StoriesPage.js';
+import SingleStory from './Profile/SingleStory.js';
 
 function App() {
   const { token } = useContext(WriterContext)
@@ -14,10 +16,12 @@ function App() {
     <div className="app">
       <Navbar />
       <Switch>
-        <Route path='/signup' render={() => token !== '' ? <Redirect to='/landingpage' /> : <Signup />} />
-        <Route path='/login' render={() => token !== '' ? <Redirect to='/landingpage' /> : <Login />} />
+        <Route path='/signup' render={() => token ? <Redirect to='/landingpage' /> : <Signup />} />
+        <Route path='/login' render={() => token ? <Redirect to='/landingpage' /> : <Login />} />
         <Route exact path="/" render={() => <Redirect to='/login'/>} />
         <ProtectedRoute path="/landingpage" component={LandingPage} ></ProtectedRoute>
+        <ProtectedRoute path='/stories' component={StoriesPage} ></ProtectedRoute>
+        <ProtectedRoute path='/story/:storyId' component={SingleStory} ></ProtectedRoute>
       </Switch>
     </div>
   );

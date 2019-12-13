@@ -17,8 +17,11 @@ function Navbar() {
                 </>
             :
                 <>
-                    <div>
-                        User Page
+                    <div className="nav-link">
+                        <Link to='/landingpage' >Home</Link>
+                    </div>
+                    <div className="nav-link">
+                        <Link to='/stories' >Stories</Link>
                     </div>
                     <div className="nav-link">
                         <button onClick={logout}>Logout</button>

@@ -7,8 +7,7 @@ const storySchema = new Schema({
         required: true
     },
     genre: {
-        type: String,
-        enum: ['Crime', 'Mystery', 'Fantasy', 'Romance', 'Science Fiction', 'Western', 'Horror', 'Inspirational', 'Non-Fiction', 'Biography']
+        type: Array,
     },
     summary: String,
     user: {

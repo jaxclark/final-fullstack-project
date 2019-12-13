@@ -6,9 +6,7 @@ export default function() {
     const { user } = useContext(WriterContext)
     return(
         <div>
-            <div>{`Successfully logged in`}</div>
-            <div>On user landing page</div>
-            <StoriesList />
+            <StoriesList type='userPage' />
         </div>
     )
 }

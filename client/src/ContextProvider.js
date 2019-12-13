@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const storiesAxios = axios.create()
+export const storiesAxios = axios.create()
 const outlinesAxios = axios.create()
 
 storiesAxios.interceptors.request.use((config) => {
@@ -18,7 +18,7 @@ outlinesAxios.interceptors.request.use((config) => {
 const WriterContext = React.createContext()
 
 function ContextProvider(props) {
-    const [userState, setUserState ] = useState({
+    const [userState, setUserState] = useState({
         user: JSON.parse(localStorage.getItem("user")) || {},
         token: localStorage.getItem("token") || ""
     })
@@ -39,7 +39,8 @@ function ContextProvider(props) {
     const addStory = (newStory) => {
         return storiesAxios.post('/writer/story', newStory)
             .then(res => {
-                setStories(prev => [...prev, newStory])
+                // setStories(prev => [...prev, newStory])
+                getStories()
                 return res
             });
     }
@@ -48,7 +49,7 @@ function ContextProvider(props) {
         return storiesAxios.put(`/writer/story/${storyId}`, story)
             .then(res => {
                 setStories(prev => {
-                    const updatedStories = prev.stories.map(story => {
+                    const updatedStories = prev.map(story => {
                         return story._id === res.data._id ? res.data : story
                     })
                     return (updatedStories)
@@ -61,7 +62,7 @@ function ContextProvider(props) {
         return storiesAxios.delete(`/writer/story/${storyId}`)
             .then(res => {
                 setStories(prev => {
-                    const updatedStories = prev.stories.filter(story => {
+                    const updatedStories = prev.filter(story => {
                         return story._id !== storyId
                     })
                     return (updatedStories)
@@ -76,6 +77,41 @@ function ContextProvider(props) {
                 setOutlines(res.data)
             })
             .catch(err => console.log(err))
+    }
+
+    const addOutline = (newOutline, story) => {
+
+        return outlinesAxios.post('/writer/story', newOutline)
+        .then(res => {
+            getOutlines()
+            return res
+        });
+    }
+
+    const editOutline = (outlineId, outline) => {
+        return outlinesAxios.put(`/writer/outline/${outlineId}`, outline)
+            .then(res => {
+                setOutlines(prev => {
+                    const updatedOutlines = prev.map(outline => {
+                        return outline._id === res.data._id ? res.data : outline
+                    })
+                    return (updatedOutlines)
+                })
+                return res;
+            })
+    }
+
+    const deleteOutline = (outlineId) => {
+        return outlinesAxios.delete(`/writer/outline/${outlineId}`)
+            .then(res => {
+                setOutlines(prev => {
+                    const updatedOutlines = prev.filter(outline => {
+                        return outline._id !== outlineId
+                    })
+                    return (updatedOutlines)
+                })
+                return res;
+            })
     }
 
     const signup = (userInfo) => {
@@ -128,6 +164,9 @@ function ContextProvider(props) {
                 deleteStory,
                 outlines,
                 getOutlines,
+                addOutline,
+                editOutline,
+                deleteOutline,
                 signup,
                 login,
                 logout
