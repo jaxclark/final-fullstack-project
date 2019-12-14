@@ -14,10 +14,11 @@ function Story(props) {
         })
     }
 
-    const getSingleStoryAndSend = e => {
-        console.log(e.target.props.story._id)
-        // this.props.history.push('/story/:e.target.props.story._id')
-    }
+    const mappedOutlines = props.outlines.map(outline => {
+        return (
+            <div>{outline.title}</div>
+        )
+    })
 
     return(
         <div className='storyComponent'>
@@ -36,6 +37,7 @@ function Story(props) {
                             onClick={() => {
                             deleteStory(props.story._id)
                         }}>Delete</button>
+                        {mappedOutlines}
                     </div>
                     :
                     <AddStoryForm button='Save' type='update' story={props.story} toggle={toggle} />
@@ -44,6 +46,7 @@ function Story(props) {
             :
                 <Link to={`/story/${props.story._id}`}>
                     <h3>{props.story.title}</h3>
+                    {mappedOutlines}
                 </Link>
             }
         </div>

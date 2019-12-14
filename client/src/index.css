@@ -4,11 +4,12 @@ body {
 }
 
 .storyDiv {
-  border: 2px solid black;
   margin-bottom: 2px;
   height: auto;
-  max-height: 200px;
+  /* max-height: 200px; */
   width: 600px;
+  display: inline-block;
+  text-align: end;
 }
 
 .storyDiv:hover {
@@ -20,4 +21,9 @@ body {
   display: grid;
   justify-content: center;
   align-content: center;
+  border: 2px solid black;
+}
+
+.storyComponent:hover {
+  background-color: rgb(228, 234, 236);
 }

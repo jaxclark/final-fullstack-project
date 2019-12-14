@@ -9,8 +9,10 @@ export default function AddStoryForm(props) {
         summary: '',
         user: JSON.parse(localStorage.getItem("user"))
     })
+    const [uniqueGenre, setUniqueGenre] = useState('')
     const [toggleOtherGenre, setOtherToggle] = useState(true)
     const [toggleGenreButtons, setToggleGenres] = useState(false)
+    const [errorMessage, setError] = useState('')
 
     useEffect(() => {
         updateStory()
@@ -20,13 +22,28 @@ export default function AddStoryForm(props) {
         setOtherToggle(prev => {
             return !prev
         })
+        console.log(uniqueGenre)
+        if(uniqueGenre) {
+            setStoryState(prev => { 
+                const filterDups = new Set([...prev.genre, uniqueGenre])
+                const toArray = [...filterDups]
+                return {
+                    ...prev,
+                    genre: toArray
+                }
+            })
+        }
+        clearUniqueGenre()
     }
 
-    const toggleGenres = () => {
-        setToggleGenres(prev => {
-            return !prev
-        })
+    const clearUniqueGenre = () => {
+        if(toggleOtherGenre) {
+            setUniqueGenre('')
+        }
+        return
     }
+
+    const toggleGenres = () => {setToggleGenres(prev => !prev)}
 
     const updateStory = () => {
         if(props.type === 'update') {
@@ -42,6 +59,52 @@ export default function AddStoryForm(props) {
         }))
     }
 
+    const deleteGenres = () => {
+        setStoryState(prev => {
+            return {
+                ...prev,
+                genre: []
+            }
+        })
+    }
+
+    const handleUniqueGenre = e => {
+        const { value } = e.target
+        setUniqueGenre(value)
+    }
+
+    const clearInputs = () => {
+        setStoryState({
+            title: '',
+            genre: [],
+            summary: ''
+        })
+        setError('')
+        setOtherToggle(true)
+        setToggleGenres(false)
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        if(props.type === 'add') {
+            addStory(storyState)
+                .then(() => {
+                    clearInputs()
+                })
+                .catch(err => {
+                    console.log(err.response.data.message)
+                    setError(err.response.data.message)
+                })
+        } else {
+            editStory(props.story._id, storyState)
+                .catch(err => {
+                    console.log(err.response.data.message)
+                    setError(err.response.data.message)
+                })
+            props.toggle()
+        }
+    }
+
     const handleGenre = e => {
         const { value } = e.target
         setStoryState(prev => { 
@@ -52,80 +115,108 @@ export default function AddStoryForm(props) {
                 genre: toArray
             }
         })
-        console.log(storyState)
-    }
-
-    const clearInputs = () => {
-        setStoryState({
-            title: '',
-            genre: [],
-            summary: ''
-        })
-    }
-
-    const handleSubmit = e => {
-        e.preventDefault()
-        if(props.type === 'add') {
-            addStory(storyState)
-                .then(() => {
-                    clearInputs()
-                })
-                .catch(err => console.log(err.response.data.message))
-        } else {
-            editStory(props.story._id, storyState)
-                .catch(err => console.log(err.response.data.message))
-            props.toggle()
-        }
     }
 
     return(
         <div>
-            <form onSubmit={handleSubmit} className={props.type === 'add' ? 'storySubmit' : 'storyEdit' } >
-                <h4>Add New Story</h4>
-                <input 
-                    name='title'
-                    value={storyState.title}
-                    onChange={handleChange}
-                    placeholder='Title'
-                    type="text"/>
-                <input 
-                    name='summary'
-                    value={storyState.summary}
-                    onChange={handleChange}
-                    placeholder='Summary'
-                    type="text"/>
-                <button type='button' onClick={toggleGenres} >Choose Genre</button>
-                { toggleGenreButtons ? 
-                    <div>
-                        <button type='button' name='genre' value='Crime' onClick={handleGenre} >Crime</button>
-                        <button type='button' name='genre' value='Mystery' onClick={handleGenre} >Mystery</button>
-                        <button type='button' name='genre' value='Fantasy' onClick={handleGenre} >Fantasy</button>
-                        <button type='button' name='genre' value='Romance' onClick={handleGenre} >Romance</button>
-                        <button type='button' name='genre' value='Science Fiction' onClick={handleGenre} >Science Fiction</button>
-                        <button type='button' name='genre' value='Western' onClick={handleGenre} >Western</button>
-                        <button type='button' name='genre' value='Horror' onClick={handleGenre} >Horror</button>
-                        <button type='button' name='genre' value='Inspirational' onClick={handleGenre} >Inspirational</button>
-                        <button type='button' name='genre' value='Non-Fiction' onClick={handleGenre} >Non-Fiction</button>
-                        <button type='button' name='genre' value='Biography' onClick={handleGenre} >Biography</button>
-                    { toggleOtherGenre ?
-                        <button type='button' name='genre' onClick={toggleOther} >Set Other</button>
-                    :
+            {props.type === 'add' ?
+                <form onSubmit={handleSubmit} className='storySubmit' >
+                    <h4>Add New Story</h4>
+                    {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
+                    <input 
+                        name='title'
+                        value={storyState.title}
+                        onChange={handleChange}
+                        placeholder='Title'
+                        type="text"/>
+                    <input 
+                        name='summary'
+                        value={storyState.summary}
+                        onChange={handleChange}
+                        placeholder='Summary'
+                        type="text"/>
+                    <button type='button' onClick={toggleGenres} >Choose Genre</button>
+                    { toggleGenreButtons ? 
                         <div>
-                            <input 
-                                name='genre'
-                                value={storyState.genre}
-                                onChange={handleGenre}
-                                placeholder='Genre'
-                                type="text"/>
-                            <button type='button' onClick={toggleOther} >Set Genre</button>
+                            <button type='button' name='genre' value='Crime' onClick={handleGenre} >Crime</button>
+                            <button type='button' name='genre' value='Mystery' onClick={handleGenre} >Mystery</button>
+                            <button type='button' name='genre' value='Fantasy' onClick={handleGenre} >Fantasy</button>
+                            <button type='button' name='genre' value='Romance' onClick={handleGenre} >Romance</button>
+                            <button type='button' name='genre' value='Science Fiction' onClick={handleGenre} >Science Fiction</button>
+                            <button type='button' name='genre' value='Western' onClick={handleGenre} >Western</button>
+                            <button type='button' name='genre' value='Horror' onClick={handleGenre} >Horror</button>
+                            <button type='button' name='genre' value='Inspirational' onClick={handleGenre} >Inspirational</button>
+                            <button type='button' name='genre' value='Non-Fiction' onClick={handleGenre} >Non-Fiction</button>
+                            <button type='button' name='genre' value='Biography' onClick={handleGenre} >Biography</button>
+                        { toggleOtherGenre ?
+                            <button type='button' name='genre' onClick={toggleOther} >Other</button>
+                        :
+                            <div>
+                                <input 
+                                    name='genre'
+                                    value={uniqueGenre}
+                                    onChange={handleUniqueGenre}
+                                    placeholder='Genre'
+                                    type="text"/>
+                                <button type='button' onClick={toggleOther} >Add Other</button>
+                            </div>
+                        }
                         </div>
+                    :
+                        <></>
                     }
-                    </div>
+                    <button>{props.button}</button>
+                </form>
                 :
-                    <></>
+                <form onSubmit={handleSubmit} className='storyEdit' >
+                    <h4>Edit Story</h4>
+                    {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
+                    <input 
+                        name='title'
+                        value={storyState.title}
+                        onChange={handleChange}
+                        placeholder='Title'
+                        type="text"/>
+                    <input 
+                        name='summary'
+                        value={storyState.summary}
+                        onChange={handleChange}
+                        placeholder='Summary'
+                        type="text"/>
+                    <button type='button' onClick={deleteGenres} >Delete Genres</button>
+                    <button type='button' onClick={toggleGenres} >Add Genre</button>
+                    { toggleGenreButtons ? 
+                        <div>
+                            <button type='button' name='genre' value='Crime' onClick={handleGenre} >Crime</button>
+                            <button type='button' name='genre' value='Mystery' onClick={handleGenre} >Mystery</button>
+                            <button type='button' name='genre' value='Fantasy' onClick={handleGenre} >Fantasy</button>
+                            <button type='button' name='genre' value='Romance' onClick={handleGenre} >Romance</button>
+                            <button type='button' name='genre' value='Science Fiction' onClick={handleGenre} >Science Fiction</button>
+                            <button type='button' name='genre' value='Western' onClick={handleGenre} >Western</button>
+                            <button type='button' name='genre' value='Horror' onClick={handleGenre} >Horror</button>
+                            <button type='button' name='genre' value='Inspirational' onClick={handleGenre} >Inspirational</button>
+                            <button type='button' name='genre' value='Non-Fiction' onClick={handleGenre} >Non-Fiction</button>
+                            <button type='button' name='genre' value='Biography' onClick={handleGenre} >Biography</button>
+                        { toggleOtherGenre ?
+                            <button type='button' name='genre' onClick={toggleOther} >Other</button>
+                        :
+                            <div>
+                                <input 
+                                    name='genre'
+                                    value={uniqueGenre}
+                                    onChange={handleUniqueGenre}
+                                    placeholder='Genre'
+                                    type="text"/>
+                                <button type='button' onClick={toggleOther} >Add Other</button>
+                            </div>
+                        }
+                        </div>
+                    :
+                        <></>
+                    }
+                    <button>{props.button}</button>
+                </form>
                 }
-                <button>{props.button}</button>
-            </form>
         </div>
     )
 }
