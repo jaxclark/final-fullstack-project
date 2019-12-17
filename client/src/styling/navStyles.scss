@@ -1,0 +1,33 @@
+@import "globals";
+
+.navbar {
+    background-color: $secondaryColor;
+    height: $navHeight;
+    min-height: 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 70px 70px 70px auto 1fr;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navLink {
+    justify-self: center;
+
+    a {
+        color: $notBlack;
+        text-decoration: none;
+    }
+}
+
+.logoutDiv {
+    grid-column: 5/6;
+    justify-self: end;
+    
+    .logoutButton {
+        background-color: $clickableColor;
+        padding: 2px 6px;
+        margin: 5px 10px;
+        color: $notBlack;
+    }
+}

@@ -2,8 +2,9 @@ import React, { useContext, useEffect } from 'react'
 import Outline from './Outline'
 import AddOutlineForm from './AddOutlineForm'
 import { WriterContext } from '../ContextProvider'
+import { withRouter } from 'react-router-dom'
 
-export default function OutlinesList() {
+function OutlinesList(props) {
     const { outlines, getOutlines, addOutline, editOutline, deleteOutline } = useContext(WriterContext)
 
     useEffect(() => {
@@ -18,11 +19,17 @@ export default function OutlinesList() {
             deleteOutline={deleteOutline}
             />
     )
+    
+    const handleClick = () => {
+        props.history.push('/newoutline/')
+    }
 
     return(
-        <div>
-            <AddOutlineForm addOutline={addOutline} />
+        <div className='outlineList'>
+            <button onClick={handleClick}>New Outline</button>
             {mappedOutlines}
         </div>
     )
 }
+
+export default withRouter(OutlinesList)

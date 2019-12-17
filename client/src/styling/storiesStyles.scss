@@ -1,0 +1,64 @@
+@import "globals";
+
+.landingPage {
+    background-color: $primaryColor;
+    height: 100%;
+    min-height: ($totalVH - $navHeight);
+
+    h1 {
+        padding: 2px 14px;
+        margin: 0;
+        text-align: end;
+    }
+}
+
+.storiesPage {
+    background-color: $primaryColor;
+    height: 100%;
+    min-height: ($totalVH - $navHeight);
+
+    h3, h4 {
+        margin: 0;
+    }
+}
+
+.storyInfoDiv {
+    height: auto;
+    min-height: 100px;
+    width: 100vw;
+}
+
+.storyComponent {
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    border: 2px solid black;
+    min-height: 100px;
+    margin-bottom: 6px;
+
+    button {
+        min-width: 50px;
+        margin: 4px;
+    }
+    
+    &:hover {
+        background-color: $clickableColor;
+    }
+}
+
+.singleStory {
+    background-color: $primaryColor;
+    height: 100%;
+    min-height: ($totalVH - $navHeight);
+
+    h4 {
+        margin: 0;
+    }
+
+}
+
+.singleStoryDiv {
+    min-height: 100px;
+    width: 100vw;
+}

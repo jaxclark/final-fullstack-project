@@ -49,15 +49,15 @@ storyRouter.route('/:storyId')
     })
 
     .put((req, res, next) => {
-        Story.findOne({ title: req.body.title}, (err, existingStory) => {
-            if(err) {
-                res.status(500);
-                return next(err);
-            } else if (existingStory !== null) {
-                res.status(400);
-                return next(new Error('Story title must be unique'));
-            }
-        })
+        // Story.findOne({ title: req.body.title}, (err, existingStory) => {
+        //     if(err) {
+        //         res.status(500);
+        //         return next(err);
+        //     } else if (existingStory !== null) {
+        //         res.status(400);
+        //         return next(new Error('Story title must be unique'));
+        //     }
+        // })
         Story.findOneAndUpdate(
             { _id: req.params.storyId, user: req.user._id },
             req.body,

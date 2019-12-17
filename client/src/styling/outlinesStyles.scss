@@ -1,0 +1,26 @@
+@import "globals";
+
+.outlineComponent {
+    background-color: $primaryColor;
+    
+}
+
+.outlineList {
+    background-color: $primaryColor;
+    height: 100%;
+    min-height: ($totalVH - $navHeight);
+
+    h3, h4 {
+        margin: 0;
+    }
+}
+
+.newOutline {
+    background-color: $primaryColor;
+    height: 100%;
+    min-height: ($totalVH - $navHeight);
+
+    h3, h4 {
+        margin: 0;
+    }
+}

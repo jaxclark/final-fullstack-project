@@ -35,7 +35,7 @@ function StoriesList(props) {
     })
 
     return(
-        <div>
+        <div className='storiesList'>
             {mappedStories}
         </div>
     )

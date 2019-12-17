@@ -36,6 +36,11 @@ export default function AddStoryForm(props) {
         clearUniqueGenre()
     }
 
+    const handleUniqueGenre = e => {
+        const { value } = e.target
+        setUniqueGenre(value)
+    }
+
     const clearUniqueGenre = () => {
         if(toggleOtherGenre) {
             setUniqueGenre('')
@@ -49,6 +54,7 @@ export default function AddStoryForm(props) {
         if(props.type === 'update') {
             setStoryState(props.story)
         }
+        console.log(storyState)
     }
 
     const handleChange = e => {
@@ -59,6 +65,18 @@ export default function AddStoryForm(props) {
         }))
     }
 
+    const handleGenre = e => {
+        const { value } = e.target
+        setStoryState(prev => { 
+            const filterDups = new Set([...prev.genre, value])
+            const toArray = [...filterDups]
+            return {
+                ...prev,
+                genre: toArray
+            }
+        })
+    }
+
     const deleteGenres = () => {
         setStoryState(prev => {
             return {
@@ -66,11 +84,6 @@ export default function AddStoryForm(props) {
                 genre: []
             }
         })
-    }
-
-    const handleUniqueGenre = e => {
-        const { value } = e.target
-        setUniqueGenre(value)
     }
 
     const clearInputs = () => {
@@ -103,18 +116,6 @@ export default function AddStoryForm(props) {
                 })
             props.toggle()
         }
-    }
-
-    const handleGenre = e => {
-        const { value } = e.target
-        setStoryState(prev => { 
-            const filterDups = new Set([...prev.genre, value])
-            const toArray = [...filterDups]
-            return {
-                ...prev,
-                genre: toArray
-            }
-        })
     }
 
     return(
