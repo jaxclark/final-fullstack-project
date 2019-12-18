@@ -1,8 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
+import {withRouter} from 'react-router-dom'
 import { WriterContext } from '../ContextProvider'
+// import FilterSearch from './FilterSearch'
 
-export default function AddOutlineForm() {
+function AddOutlineForm(props) {
     const { stories, getStories, addOutline } = useContext(WriterContext)
+    // const [toggle, setToggle] = useState(false)
     const [outlineState, setOutlineState] = useState({
         title: '',
         partOne: '', 
@@ -13,17 +16,14 @@ export default function AddOutlineForm() {
         partSix: '',
         partSeven: '',
         user: JSON.parse(localStorage.getItem("user")),
-        story: ''
+        story: props.match.params.storyId
     })
-    //for story have the person select the name of the story they're adding it to, and then 
-    //  use a find to get the story id? 
 
     useEffect(() => {
         getStories()
     }, [])
 
     const handleChange = e => {
-        e.persist()
         const {name, value} = e.target
         setOutlineState(prev => ({
             ...prev,
@@ -40,43 +40,57 @@ export default function AddOutlineForm() {
             partFour: '',
             partFive: '',
             partSix: '',
-            partSeven: '',
-            story: ''
+            partSeven: ''
         })
     }
 
+    console.log(props.match.params.storyId)
 
-    const getTheBloodyStories = (e) => {
-        e.preventDefault()
-        getStories()
-        .then(handleAssocStory())
-    }
-    const handleAssocStory = () => {
-        console.log(outlineState)
-        for(let i = 0; i < stories.length; i++) { //do I need this? maybe not
-            const thing = stories.find(title => title.title.includes(outlineState.story))
-            return thing._id
-        }
-        // if(stories.includes('story')){
-        //     return console.log('worked')
-        // } else {
-        //     return console.log('nope')
-        // }
-    }
+    // const getTheBloodyStories = (e) => {
+    //     e.preventDefault()
+    //     // getStories()
+    //     handleAssocStory()
+    // }
 
-    console.log(stories)
+    // const handleToggle = () => {setToggle(prev => !prev)}
+
+    // const handleAssocStory = (e) => {
+    //     console.log(outlineState)
+    //     const thing = stories.find(title => title.title.includes(outlineState.story))
+    //     setOutline(e, thing)
+    //     // console.log(thing._id)
+    // }
+    
+    // const setOutline = (e, thing) => {
+    //     setOutlineState(prev => ({
+    //         ...prev,
+    //         story: thing._id
+    //     }))
+    //     dummyFunction(e)
+    // }
+    
+    // const dummyFunction = (e) => {
+    //     handleSubmit(e)
+    // }
+    console.log(outlineState)
+
+    // console.log(stories)
     const handleSubmit = e => {
         e.preventDefault()
-        addOutline({outlineState})
+        console.log(outlineState)
+        console.log('submitting')
+        addOutline(outlineState)
             .then(() => {
                 clearInputs()
             })
             .catch(err => console.log(err.response.data.message))
     }
 
+    // const mappedStoryTitles = stories.map(story => <th key={story._id}>{story.title}</th>)
+
     return(
         <div>
-            <form onSubmit={getTheBloodyStories}>
+            <form onSubmit={handleSubmit}>
                 <h4>Add New Outline</h4>
                 <input onChange={handleChange} value={outlineState.title} type="text" name='title' placeholder='Title'/>
                 <input onChange={handleChange} value={outlineState.partOne} type="text" name='partOne' placeholder='Part One'/>
@@ -86,9 +100,32 @@ export default function AddOutlineForm() {
                 <input onChange={handleChange} value={outlineState.partFive} type="text" name='partFive' placeholder='Part Five'/>
                 <input onChange={handleChange} value={outlineState.partSix} type="text" name='partSix' placeholder='Part Six'/>
                 <input onChange={handleChange} value={outlineState.partSeven} type="text" name='partSeven' placeholder='Part Seven'/>
-                <input onChange={handleChange} value={outlineState.story} type="text" name='story' placeholder='Associated Story'/>
+                {/* <input onChange={handleChange} value={outlineState.story} type="text" name='story' placeholder='Associated Story'/> */}
+                {/* <button type='button' onClick={handleToggle}>Choose Story</button>
+                {toggle ? 
+                <></>
+                :
+                <div>
+                    <div>
+                        <input type="text" name="story" value={outlineState.story} onChange={handleChange}/>
+                        {mappedStoryTitles}
+                        <button type='button' onClick={handleToggle}>Select Story</button>
+                    </div>
+                    <input style={{margin: '0 80px'}} type="text" name="story" value={outlineState.story} onChange={filterList}/>
+                    <div>
+                        {
+                            stories.map((story => {
+                                return <div key={story._id}>{story.title}</div>
+                            }))
+                        }
+                    </div>
+                </div>
+                } */}
+                {/* <FilterSearch content={stories && stories} /> */}
                 <button>Submit</button>
             </form>
         </div>
     )
 }
+
+export default withRouter(AddOutlineForm)

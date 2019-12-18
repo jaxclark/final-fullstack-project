@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { withRouter } from 'react-router-dom'
 import { storiesAxios, WriterContext } from '../ContextProvider'
+import Menu from './Menu'
 
 function SingleStory(props) {
     const { editStory, deleteStory } = useContext(WriterContext)
@@ -124,8 +125,10 @@ function SingleStory(props) {
         setOtherToggle(true)
         setToggleGenres(false)
     }
-
-
+    
+    const addOutline = (storyId) => {
+        props.history.push(`/newoutline/${storyId}`)
+    }
 
     const wholeStoryArray = Object.entries(singleStory)
 
@@ -161,8 +164,10 @@ function SingleStory(props) {
 
     return(
         <div className='singleStory'>
+            <Menu />
             {toggled ? 
             <>
+                <button onClick={() => addOutline(singleStory._id)}>Add Outline</button>
                 <button onClick={toggle}>Edit</button>
                 <button onClick={() => {deleteStory(singleStory._id)}}>Delete</button>
             </>

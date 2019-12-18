@@ -1,7 +1,7 @@
 @import "globals";
 
 .navbar {
-    background-color: $secondaryColor;
+    background-color: $primaryColor;
     height: $navHeight;
     min-height: 40px;
     width: 100%;
@@ -9,10 +9,8 @@
     grid-template-columns: 70px 70px 70px auto 1fr;
     justify-content: space-around;
     align-items: center;
-}
-
-.navLink {
-    justify-self: center;
+    font-family: $secondaryFont;
+    color: $notBlack;
 
     a {
         color: $notBlack;
@@ -20,14 +18,61 @@
     }
 }
 
+.navLink {
+    justify-self: center;
+}
+
+// .userName {
+//     display: inline;
+//     align-self: bottom;
+//     padding: 8px 4px 0px 0;
+//     margin: 0 0 12px 0;
+//     text-align: end;
+//     font-family: $secondaryFont;
+//     color: $notBlack;
+//     border-bottom: 4px solid $notBlack;
+//     font-size: 30px;
+// }
+
 .logoutDiv {
     grid-column: 5/6;
     justify-self: end;
     
     .logoutButton {
-        background-color: $clickableColor;
+        background-color: $buttonColor;
         padding: 2px 6px;
-        margin: 5px 10px;
+        margin: 5px 30px 5px 30px;
         color: $notBlack;
+        border-radius: 2px;
+        font-family: $primaryFont;
+        font-size: 14px;
+
+        &:hover {
+            background-color: $buttonHover;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.menuDiv {
+    width: 100%;
+    border-top: 4px solid $secondaryColor;
+    border-bottom: 4px solid $secondaryColor;
+    padding: 10px 0;
+    margin-top: 2px;
+    background-color: $thirdColor;
+    display: inline-block;
+}
+
+.menuLink {
+    display: inline;
+    padding: 16px;
+
+    a {
+        color: $notBlack;
+        text-decoration: none;
+        font-size: 20px;
     }
 }

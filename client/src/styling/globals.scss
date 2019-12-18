@@ -1,7 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Girassol|Inria+Serif|Poppins|Playfair+Display|Gupter|PT+Sans|PT+Serif|Ubuntu|Baskervville|Josefin+Sans&display=swap');
+
 $primaryColor: #b1c4dd;
-$secondaryColor: #597db3;
-$notBlack: rgb(17, 16, 16);
-$clickableColor: rgb(228, 234, 236);
+$secondaryColor: #345fa0;
+$thirdColor: #e1eaf7;
+$notBlack: rgb(49, 48, 46);
+$notWhite: rgb(247, 249, 252);
 
 $navHeight: 6vh;
 $totalVH: 100vh;
+
+$primaryFont: 'Baskervville', serif, 'Times New Roman';
+$secondaryFont:  'Playfair Display', cursive, serif, 'Times New Roman';
+
+$buttonColor: #f5f9ff;
+$buttonHover: #d6e0f0;
+
+$primaryBorder: 2px solid $secondaryColor;

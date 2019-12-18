@@ -1,7 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { WriterContext } from '../ContextProvider'
+import { withRouter } from 'react-router-dom'
 
-export default function AddStoryForm(props) {
+function AddStoryForm(props) {
     const { addStory, editStory } = useContext(WriterContext)
     const [storyState, setStoryState] = useState({
         title: '',
@@ -103,6 +104,7 @@ export default function AddStoryForm(props) {
             addStory(storyState)
                 .then(() => {
                     clearInputs()
+                    props.history.push(`/stories/`)
                 })
                 .catch(err => {
                     console.log(err.response.data.message)
@@ -221,3 +223,5 @@ export default function AddStoryForm(props) {
         </div>
     )
 }
+
+export default withRouter(AddStoryForm)

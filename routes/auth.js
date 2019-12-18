@@ -16,7 +16,12 @@ authRouter.post('/signup', (req, res, next) => {
         newUser.save((err, user) => {
             if(err) {
                 res.status(500)
-                return next(err);
+                console.log(err._message)
+                if(err.name  === 'ValidationError') {
+                    return next(new Error('All fields are required.'))
+                } else {
+                    return next(err);
+                }
             }
             const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
             return res.status(201).send({ success: true, user: user.withoutPassword(), token });
@@ -24,14 +29,14 @@ authRouter.post('/signup', (req, res, next) => {
     });
 });
 
-authRouter.post('/login', (req, res) => {
+authRouter.post('/login', (req, res, next) => {
     User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
         if(err) {
             res.status(500)
             return next(err);
         } if(!user) {
             res.status(403)
-            return next(new Error ('Username or password is incorrect'))
+            return next(new Error('Username or password is incorrect'))
         }
         user.checkPassword(req.body.password, (err, match) => {
             if(err) {
@@ -39,7 +44,7 @@ authRouter.post('/login', (req, res) => {
                 return next(err);
             } if(!match) {
                 res.status(401)
-                return next(new Error ('Username or password is incorrect'));
+                return next(new Error('Username or password is incorrect'));
             }
             const token = jwt.sign(user.withoutPassword(), process.env.SECRET);
             return res.send({ token: token, user: user.withoutPassword(), success: true })

@@ -1,31 +1,65 @@
 @import "globals";
 
+body {
+    font-family: $primaryFont;
+}
+///////////
 .landingPage {
     background-color: $primaryColor;
     height: 100%;
+    width: auto;
     min-height: ($totalVH - $navHeight);
+    color: $notBlack;
+    padding: 0 30px 10px 30px;
 
     h1 {
-        padding: 2px 14px;
-        margin: 0;
+        padding: 8px 4px 0px 0;
+        margin: 0 0 12px 0;
         text-align: end;
+        font-family: $secondaryFont;
+        color: $notBlack;
+        border-bottom: 4px solid $notBlack;
+        font-size: 40px;
     }
 }
-
+//////////
 .storiesPage {
     background-color: $primaryColor;
     height: 100%;
     min-height: ($totalVH - $navHeight);
+    padding: 0 30px 10px 30px;
+    display: block;
 
     h3, h4 {
         margin: 0;
     }
+
+    button {
+        min-width: 50px;
+        margin: 4px;
+        background-color: $buttonColor;
+        padding: 2px 6px;
+        border-radius: 2px;
+        font-family: $primaryFont;
+        color: $notBlack;
+        font-size: 14px;
+    }
 }
+
+.newStoryButtonDiv {
+    display: flex;
+    justify-content: flex-end;
+
+    .newStoryButton {
+        margin: 10px 0 10px 0;
+    }
+}
+
 
 .storyInfoDiv {
     height: auto;
     min-height: 100px;
-    width: 100vw;
+    width: 100%;
 }
 
 .storyComponent {
@@ -33,20 +67,30 @@
     display: grid;
     justify-content: center;
     align-content: center;
-    border: 2px solid black;
+    border: $primaryBorder;
+    border-radius: 4px;
     min-height: 100px;
     margin-bottom: 6px;
+    background-color: $thirdColor;
 
     button {
         min-width: 50px;
         margin: 4px;
-    }
-    
-    &:hover {
-        background-color: $clickableColor;
+        background-color: $buttonColor;
+        padding: 2px 6px;
+        border-radius: 2px;
+        font-family: $primaryFont;
+        color: $notBlack;
+
+        &:hover {
+            background-color: $buttonHover;
+        }
+        &:focus {
+            outline: none;
+        }
     }
 }
-
+////////
 .singleStory {
     background-color: $primaryColor;
     height: 100%;
@@ -60,5 +104,71 @@
 
 .singleStoryDiv {
     min-height: 100px;
-    width: 100vw;
+    width: 100%;
+
+    h2 {
+        margin: 0;
+        padding: 14px;
+    }
+}
+
+.mappedOutlines {
+    display: inline-block;
+    padding: 0 24px;
+    border: 1px solid lightgrey;
+    margin: 4px 6px;
+
+    &:hover {
+        background-color: $notWhite;
+    }
+}
+
+.storySubmit {
+    color: $notBlack;
+
+    button {
+        min-width: 50px;
+        margin: 4px;
+        background-color: $buttonColor;
+        padding: 2px 6px;
+        border-radius: 2px;
+        font-family: $primaryFont;
+        color: $notBlack;
+
+        &:active {
+            background-color: $buttonHover;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.storyEdit {
+    color: $notBlack;
+
+    button {
+        min-width: 50px;
+        margin: 4px;
+        background-color: $buttonColor;
+        padding: 2px 6px;
+        border-radius: 2px;
+        font-family: $primaryFont;
+        color: $notBlack;
+
+        &:hover {
+            background-color: $buttonHover;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+/////////////
+.newStoryPage {
+    background-color: $primaryColor;
+    height: 100%;
+    min-height: ($totalVH - $navHeight);
+    padding: 0 30px 10px 30px;
 }

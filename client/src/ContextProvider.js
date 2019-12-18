@@ -32,6 +32,7 @@ function ContextProvider(props) {
         return storiesAxios.get('/writer/story')
             .then(res => {
                 setStories(res.data)
+                console.log('stories are retrieved')
                 return res
             })
         }
@@ -81,7 +82,7 @@ function ContextProvider(props) {
 
     const addOutline = (newOutline, story) => {
 
-        return outlinesAxios.post('/writer/story', newOutline)
+        return outlinesAxios.post('/writer/outline', newOutline)
         .then(res => {
             getOutlines()
             return res

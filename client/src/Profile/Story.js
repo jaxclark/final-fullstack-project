@@ -15,13 +15,17 @@ function Story(props) {
 
     const mappedOutlines = props.outlines.map(outline => {
         return (
-            <div>{outline.title}</div>
+            <div className='mappedOutlines'>{outline.title}</div>
         )
     })
 
     const handleClick = () => {
         props.history.push(`/story/${props.story._id}`)
         {/* <Link to={`/story/${props.story._id}`}/> */}
+    }
+
+    const addOutline = (storyId) => {
+        props.history.push(`/newoutline/${storyId}`)
     }
 
     return(
@@ -36,6 +40,7 @@ function Story(props) {
                             <p>{props.story.summary}</p>
                             {mappedOutlines}
                         </div>
+                            <button onClick={() => addOutline(props.story._id)}>Add Outline</button>
                             <button onClick={() => {
                                 editStory(props.story._id, props.story)
                                 toggle()}}
@@ -51,7 +56,7 @@ function Story(props) {
                 </div>
             :
                 <div className='singleStoryDiv' onClick={handleClick}>
-                    <h3>{props.story.title}</h3>
+                    <h2>{props.story.title}</h2>
                     {mappedOutlines}
                 </div>
             }

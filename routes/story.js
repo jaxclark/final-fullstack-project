@@ -28,7 +28,11 @@ storyRouter.route('/')
         story.save(function (err, newStory) {
             if(err) {
                 res.status(500);
-                return next(err);
+                if(err.message === 'Story validation failed: title: Path `title` is required.') {
+                    return next(new Error('Story must have a title.'))
+                } else {
+                    return next(err);
+                }
             }
             return res.status(201).send(newStory);
         })

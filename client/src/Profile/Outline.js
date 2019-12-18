@@ -2,7 +2,6 @@ import React from 'react'
 import '../styling/outlinesStyles.scss'
 
 export default function Outline (props) {
-    console.log(props.outline)
     return (
         <div className='outlineComponent'>
             <h3>{props.outline.title}</h3>
