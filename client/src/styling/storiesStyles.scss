@@ -104,11 +104,11 @@ body {
     width: 100%;
     display: flex;
     justify-content: start;
-    padding: 10px;
+    padding: 10px 0px;
     h2 {
         border-radius: 4px;
-        margin: 0;
-        padding: 4px 0px;
+        margin: 0 6px;
+        padding: 4px 14px;
         &:hover {
             background-color: $notWhite;
         }
@@ -169,34 +169,20 @@ body {
     background-color: $primaryColor;
     height: 100%;
     min-height: ($totalVH - $navHeight);
-    h4 {
-        margin: 0;
-    }
-
-}
-
-.storySubmit {
-    color: $notBlack;
-    button {
-        min-width: 50px;
-        margin: 4px;
-        background-color: $buttonColor;
-        padding: 2px 6px;
-        border: 1px solid $buttonOutline;
-        border-radius: 3px;
-        font-family: $primaryFont;
-        color: $notBlack;
-        &:active {
-            background-color: $buttonHover;
-        }
-        &:focus {
-            outline: none;
-        }
-    }
 }
 
 .storyEdit {
     color: $notBlack;
+    input {
+        font-family: $primaryFont;
+        color: $notBlack;
+        font-size: 14px;
+        border: 1px solid $buttonOutline;
+        border-radius: 3px;
+        &:focus {
+            outline: none;
+        }
+    }
     button {
         min-width: 50px;
         margin: 4px;
@@ -221,4 +207,77 @@ body {
     height: 100%;
     min-height: ($totalVH - $navHeight);
     padding: 0 30px 10px 30px;
+}
+
+.storySubmit {
+    text-align: start;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: start;
+    align-content: center;
+    border: $primaryBorder;
+    border-radius: 4px;
+    min-height: 100px;
+    padding: 12px;
+    margin-top: 14px;
+    background-color: $thirdColor;
+    h2 {
+        border-radius: 4px;
+        margin: 0;
+        padding: 14px 10px;
+    }
+}
+
+.storySubmitForm {
+    text-align: end;
+    width: 100%;
+    input {
+        font-family: $primaryFont;
+        color: $notBlack;
+        font-size: 14px;
+        border: 1px solid $buttonOutline;
+        border-radius: 3px;
+        box-sizing: border-box;
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px 10px;
+        &:focus {
+            outline: none;
+        }
+    }
+    .summary {
+        height: 30vh;
+        font-family: $primaryFont;
+        color: $notBlack;
+        font-size: 14px;
+        border: 1px solid $buttonOutline;
+        border-radius: 3px;
+        box-sizing: border-box;
+        resize: none;
+        width: 100%;
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px 10px;
+        &:focus {
+            outline: none;
+        }
+    }
+    button {
+        min-width: 50px;
+        margin: 4px;
+        background-color: $buttonColor;
+        padding: 2px 6px;
+        border: 1px solid $buttonOutline;
+        border-radius: 3px;
+        font-family: $primaryFont;
+        color: $notBlack;
+        font-size: 14px;
+        &:active {
+            background-color: $buttonHover;
+        }
+        &:focus {
+            outline: none;
+        }
+    }
 }

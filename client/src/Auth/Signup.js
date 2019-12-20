@@ -50,7 +50,7 @@ function Signup() {
                     onChange={handleChange}
                     value={password}
                     name="password"
-                    type="text"
+                    type="password"
                     placeholder="Password"/>
                 <button type="submit">Create Account</button>
             </form>

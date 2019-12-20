@@ -49,7 +49,7 @@ function Login() {
                     onChange={handleChange}
                     value={password}
                     name="password"
-                    type="text"
+                    type="password"
                     placeholder="password"/>
                 <button type="submit">Submit</button>
             </form>

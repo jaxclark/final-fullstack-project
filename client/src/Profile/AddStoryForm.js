@@ -124,21 +124,23 @@ function AddStoryForm(props) {
         <div>
             {props.type === 'add' ?
                 <form onSubmit={handleSubmit} className='storySubmit' >
-                    <h4>Add New Story</h4>
+                    <h2>Add New Story</h2>
                     {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
-                    <input 
-                        name='title'
-                        value={storyState.title}
-                        onChange={handleChange}
-                        placeholder='Title'
-                        type="text"/>
-                    <input 
-                        name='summary'
-                        value={storyState.summary}
-                        onChange={handleChange}
-                        placeholder='Summary'
-                        type="text"/>
-                    <button type='button' onClick={toggleGenres} >Choose Genre</button>
+                    <div className='storySubmitForm'>
+                        <input 
+                            name='title'
+                            value={storyState.title}
+                            onChange={handleChange}
+                            placeholder='Title'
+                            type="text"/>
+                        <textarea 
+                            name='summary'
+                            className='summary'
+                            value={storyState.summary}
+                            onChange={handleChange}
+                            placeholder='Summary'
+                            type="text"/>
+                        <button type='button' onClick={toggleGenres} >Choose Genre</button>
                     { toggleGenreButtons ? 
                         <div>
                             <button type='button' name='genre' value='Crime' onClick={handleGenre} >Crime</button>
@@ -169,10 +171,11 @@ function AddStoryForm(props) {
                         <></>
                     }
                     <button>{props.button}</button>
+                    </div>
                 </form>
                 :
                 <form onSubmit={handleSubmit} className='storyEdit' >
-                    <h4>Edit Story</h4>
+                    <h2>Edit Story</h2>
                     {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
                     <input 
                         name='title'
