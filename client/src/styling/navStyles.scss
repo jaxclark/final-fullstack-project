@@ -37,17 +37,16 @@
 .logoutDiv {
     grid-column: 5/6;
     justify-self: end;
-    
     .logoutButton {
         background-color: $buttonColor;
         padding: 2px 6px;
         margin: 5px 30px 5px 30px;
         color: $notBlack;
-        border-radius: 2px;
+        border: 1px solid $buttonOutline;
+        border-radius: 3px;
         font-family: $primaryFont;
         font-size: 14px;
-
-        &:hover {
+        &:active {
             background-color: $buttonHover;
         }
         &:focus {
@@ -60,6 +59,7 @@
     width: 100%;
     border-top: 4px solid $secondaryColor;
     border-bottom: 4px solid $secondaryColor;
+    border-radius: 4px;
     padding: 10px 0;
     margin-top: 2px;
     background-color: $thirdColor;
@@ -69,7 +69,6 @@
 .menuLink {
     display: inline;
     padding: 16px;
-
     a {
         color: $notBlack;
         text-decoration: none;

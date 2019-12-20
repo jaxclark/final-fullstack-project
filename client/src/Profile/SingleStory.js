@@ -20,16 +20,19 @@ function SingleStory(props) {
         user: JSON.parse(localStorage.getItem("user"))
     })
 
+    const {storyId} = props.match.params
+
     useEffect(() => {
-        getSingleStory()
-        updateStory()
-    }, [])
+        storiesAxios.get(`/writer/story/${storyId}`)
+            .then(res => {
+                setSingleStory(res.data)
+            })
+    }, [storyId])
 
     const getSingleStory = () => {
-        return storiesAxios.get(`/writer/story/${props.match.params.storyId}`)
+        storiesAxios.get(`/writer/story/${storyId}`)
         .then(res => {
             setSingleStory(res.data)
-            return res
         })
     }
 
@@ -115,19 +118,8 @@ function SingleStory(props) {
         toggle()
     }
     
-    const clearInputs = () => {
-        setStoryState({
-            title: '',
-            genre: [],
-            summary: ''
-        })
-        setError('')
-        setOtherToggle(true)
-        setToggleGenres(false)
-    }
-    
-    const addOutline = (storyId) => {
-        props.history.push(`/newoutline/${storyId}`)
+    const addOutline = (Id) => {
+        props.history.push(`/newoutline/${Id}`)
     }
 
     const wholeStoryArray = Object.entries(singleStory)

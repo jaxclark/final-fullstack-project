@@ -11,6 +11,7 @@ import SingleStory from './Profile/SingleStory.js';
 // import OutlinesPage from './Profile/OutlinesPage.js';
 import NewOutline from './Profile/NewOutline.js';
 import NewStory from './Profile/NewStory.js';
+import SingleOutline from './Profile/SingleOutline.js';
 
 function App() {
   const { token } = useContext(WriterContext)
@@ -28,6 +29,7 @@ function App() {
         <ProtectedRoute path='/newstory' component={NewStory} ></ProtectedRoute>
         {/* <ProtectedRoute path='/outlines' component={OutlinesPage} ></ProtectedRoute> */}
         <ProtectedRoute path='/newoutline/:storyId' component={NewOutline} ></ProtectedRoute>
+        <ProtectedRoute path='/outline/:outlineId' component={SingleOutline} ></ProtectedRoute>
       </Switch>
     </div>
   );

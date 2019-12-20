@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 export const storiesAxios = axios.create()
-const outlinesAxios = axios.create()
+export const outlinesAxios = axios.create()
 
 storiesAxios.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
@@ -32,7 +32,6 @@ function ContextProvider(props) {
         return storiesAxios.get('/writer/story')
             .then(res => {
                 setStories(res.data)
-                console.log('stories are retrieved')
                 return res
             })
         }

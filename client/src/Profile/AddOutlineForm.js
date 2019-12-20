@@ -44,37 +44,6 @@ function AddOutlineForm(props) {
         })
     }
 
-    console.log(props.match.params.storyId)
-
-    // const getTheBloodyStories = (e) => {
-    //     e.preventDefault()
-    //     // getStories()
-    //     handleAssocStory()
-    // }
-
-    // const handleToggle = () => {setToggle(prev => !prev)}
-
-    // const handleAssocStory = (e) => {
-    //     console.log(outlineState)
-    //     const thing = stories.find(title => title.title.includes(outlineState.story))
-    //     setOutline(e, thing)
-    //     // console.log(thing._id)
-    // }
-    
-    // const setOutline = (e, thing) => {
-    //     setOutlineState(prev => ({
-    //         ...prev,
-    //         story: thing._id
-    //     }))
-    //     dummyFunction(e)
-    // }
-    
-    // const dummyFunction = (e) => {
-    //     handleSubmit(e)
-    // }
-    console.log(outlineState)
-
-    // console.log(stories)
     const handleSubmit = e => {
         e.preventDefault()
         console.log(outlineState)
@@ -85,8 +54,6 @@ function AddOutlineForm(props) {
             })
             .catch(err => console.log(err.response.data.message))
     }
-
-    // const mappedStoryTitles = stories.map(story => <th key={story._id}>{story.title}</th>)
 
     return(
         <div>
@@ -100,28 +67,6 @@ function AddOutlineForm(props) {
                 <input onChange={handleChange} value={outlineState.partFive} type="text" name='partFive' placeholder='Part Five'/>
                 <input onChange={handleChange} value={outlineState.partSix} type="text" name='partSix' placeholder='Part Six'/>
                 <input onChange={handleChange} value={outlineState.partSeven} type="text" name='partSeven' placeholder='Part Seven'/>
-                {/* <input onChange={handleChange} value={outlineState.story} type="text" name='story' placeholder='Associated Story'/> */}
-                {/* <button type='button' onClick={handleToggle}>Choose Story</button>
-                {toggle ? 
-                <></>
-                :
-                <div>
-                    <div>
-                        <input type="text" name="story" value={outlineState.story} onChange={handleChange}/>
-                        {mappedStoryTitles}
-                        <button type='button' onClick={handleToggle}>Select Story</button>
-                    </div>
-                    <input style={{margin: '0 80px'}} type="text" name="story" value={outlineState.story} onChange={filterList}/>
-                    <div>
-                        {
-                            stories.map((story => {
-                                return <div key={story._id}>{story.title}</div>
-                            }))
-                        }
-                    </div>
-                </div>
-                } */}
-                {/* <FilterSearch content={stories && stories} /> */}
                 <button>Submit</button>
             </form>
         </div>

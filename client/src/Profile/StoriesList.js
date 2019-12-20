@@ -19,18 +19,6 @@ function StoriesList(props) {
                 editStory={editStory}
                 deleteStory={deleteStory}
                 outlines={storyOutlines}
-                classname={
-                    story.genre === 'Crime' ? 'crime'
-                    : story.genre === 'Mystery' ? 'mystery'
-                    : story.genre === 'Fantasy' ? 'fantasy'
-                    : story.genre === 'Romance' ? 'romance'
-                    : story.genre === 'Science Fiction' ? 'scienceFiction'
-                    : story.genre === 'Western' ? 'western'
-                    : story.genre === 'Horror' ? 'horror'
-                    : story.genre === 'Inspirational' ? 'inspirational'
-                    : story.genre === 'Non-Fiction' ? 'nonFiction'
-                    : story.genre === 'Biography' ? 'biography'
-                    : 'none'}
                 />
     })
 

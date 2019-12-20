@@ -25,17 +25,6 @@ outlineRouter.route('/')
         });
     });
 
-outlineRouter.route('/:storyId')
-    .get((req, res, next) => {
-        Outline.find({ story: req.params.storyId, user: req.user._id }, (err, outlines) => {
-            if(err) {
-                res.status(500);
-                return next(err)
-            }
-            return res.send(outlines)
-        })
-    })
-
 outlineRouter.route('/:outlineId')
     .get((req, res, next) => {
         Outline.findOne({ _id: req.params.outlineId, user: req.user._id }, (err, outline) => {

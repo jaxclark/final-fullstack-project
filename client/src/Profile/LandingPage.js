@@ -6,7 +6,6 @@ import Menu from './Menu'
 
 export default function() {
     const { user } = useContext(WriterContext)
-    console.log(user.username)
     return(
         <div className='landingPage'>
             <Menu />
