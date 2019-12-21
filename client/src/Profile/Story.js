@@ -42,14 +42,14 @@ function Story(props) {
                     { toggled ? 
                     <div>
                         <div className='storyInfoDiv'>
-                            <div className='singleStoryTitleDiv'>
+                            <div className='storyComponentTitleDiv'>
                                 <h2 onClick={handleClick}>{props.story.title}</h2>
                             </div>
-                            {props.story.genre.map(genre => genre && <p className='singleStoryGenreP'>{genre}</p>)}
-                            {props.story.summary && <p className='singleStorySummary'>{props.story.summary}</p>}
+                            {props.story.genre.map(genre => genre && <p className='storyComponentGenreP'>{genre}</p>)}
+                            {props.story.summary && <p className='storyComponentSummary'>{props.story.summary}</p>}
                             {mappedOutlines && mappedOutlines}
                         </div>
-                        <div className='singleStoryButtons'>
+                        <div className='storyComponentButtons'>
                             <button onClick={() => addOutline(props.story._id)}>Add Outline</button>
                             <button onClick={() => {
                                 editStory(props.story._id, props.story)
@@ -66,8 +66,8 @@ function Story(props) {
                     }                    
                 </div>
             :
-                <div className='singleStoryDiv'>
-                    <div className='singleStoryTitleDiv'>
+                <div className='storyComponentDiv'>
+                    <div className='storyComponentTitleDiv'>
                         <h2 onClick={handleClick}>{props.story.title}</h2>
                     </div>
                     {mappedOutlines}

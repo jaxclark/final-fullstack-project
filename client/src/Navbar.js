@@ -9,6 +9,9 @@ function Navbar() {
         <nav className="navbar">
             {token === '' ? 
                 <>
+                    <div className='verticalLogoDiv2'>
+                        <img className='verticalLogo2' src="https://cdn.discordapp.com/attachments/632280517013930044/657638681674252298/plotChaserHoriz.png" alt="vertLogo"/>
+                    </div>
                     <div className="navLink">
                         <Link to="/signup">Sign Up</Link>
                     </div>
@@ -18,8 +21,10 @@ function Navbar() {
                 </>
             :
                 <>
+                    <div className='verticalLogoDiv'>
+                        <img className='verticalLogo' src="https://cdn.discordapp.com/attachments/632280517013930044/657638681674252298/plotChaserHoriz.png" alt="vertLogo"/>
+                    </div>
                     <div className="logoutDiv">
-                        {/* <h1 className='userName'>{user.username}</h1> */}
                         <button className='logoutButton' onClick={logout}>Log Out</button>
                     </div>
                 </>

@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { WriterContext } from '../ContextProvider'
+import '../styling/authStyles.scss'
 
 function Login() {
     const { login } = useContext(WriterContext)
@@ -36,22 +37,24 @@ function Login() {
     }
 
     return(
-        <div className="form-wrapper">
-            <form onSubmit={handleSubmit}>
-                <h3>Log In</h3>
-                <input
-                    onChange={handleChange}
-                    value={username}
-                    name="username"
-                    type="text"
-                    placeholder="username"/>
-                <input
-                    onChange={handleChange}
-                    value={password}
-                    name="password"
-                    type="password"
-                    placeholder="password"/>
-                <button type="submit">Submit</button>
+        <div className="login">
+            <form className='loginForm' onSubmit={handleSubmit}>
+                <div className='loginDiv'>
+                    <h2>Log In</h2>
+                    <input
+                        onChange={handleChange}
+                        value={username}
+                        name="username"
+                        type="text"
+                        placeholder="username"/>
+                    <input
+                        onChange={handleChange}
+                        value={password}
+                        name="password"
+                        type="password"
+                        placeholder="password"/>
+                    <button type="submit">Submit</button>
+                </div>
             </form>
             {errorMessage && <p style={{color: 'red'}}>{errorMessage}</p>}
         </div>

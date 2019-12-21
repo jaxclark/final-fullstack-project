@@ -4,8 +4,9 @@ import { WriterContext } from '../ContextProvider'
 // import FilterSearch from './FilterSearch'
 
 function AddOutlineForm(props) {
-    const { stories, getStories, addOutline } = useContext(WriterContext)
+    const { getStories, addOutline } = useContext(WriterContext)
     // const [toggle, setToggle] = useState(false)
+    const [outlineType, setOutlineType] = useState('threeAct')
     const [outlineState, setOutlineState] = useState({
         title: '',
         partOne: '', 
@@ -22,6 +23,11 @@ function AddOutlineForm(props) {
     useEffect(() => {
         getStories()
     }, [])
+
+    const handleOutlineType = e => {
+        const {value} = e.target
+        setOutlineType(value)
+    }
 
     const handleChange = e => {
         const {name, value} = e.target
@@ -53,21 +59,42 @@ function AddOutlineForm(props) {
                 clearInputs()
             })
             .catch(err => console.log(err.response.data.message))
+        props.history.push(`/stories`)
     }
 
     return(
-        <div>
-            <form onSubmit={handleSubmit}>
-                <h4>Add New Outline</h4>
-                <input onChange={handleChange} value={outlineState.title} type="text" name='title' placeholder='Title'/>
-                <input onChange={handleChange} value={outlineState.partOne} type="text" name='partOne' placeholder='Part One'/>
-                <input onChange={handleChange} value={outlineState.partTwo} type="text" name='partTwo' placeholder='Part Two'/>
-                <input onChange={handleChange} value={outlineState.partThree} type="text" name='partThree' placeholder='Part Three'/>
-                <input onChange={handleChange} value={outlineState.partFour} type="text" name='partFour' placeholder='Part Four'/>
-                <input onChange={handleChange} value={outlineState.partFive} type="text" name='partFive' placeholder='Part Five'/>
-                <input onChange={handleChange} value={outlineState.partSix} type="text" name='partSix' placeholder='Part Six'/>
-                <input onChange={handleChange} value={outlineState.partSeven} type="text" name='partSeven' placeholder='Part Seven'/>
-                <button>Submit</button>
+        <div className='addOutlineDiv'>
+            <form className='addOutlineForm' onSubmit={handleSubmit}>
+                <h2>Add New Outline</h2>
+                <select onChange={handleOutlineType} className='addOutlineSelect'>
+                    <option value="threeAct">Three Act Structure</option>
+                    <option value="sevenPoint">Seven Point System</option>
+                </select>
+                {outlineType === 'sevenPoint' ? 
+                <>
+                    <input onChange={handleChange} value={outlineState.title} type="text" name='title' placeholder='Title'/>
+                    <textarea onChange={handleChange} value={outlineState.partOne} type="text" name='partOne' placeholder='Hook'/>
+                    <textarea onChange={handleChange} value={outlineState.partTwo} type="text" name='partTwo' placeholder='Plot Twist One'/>
+                    <textarea onChange={handleChange} value={outlineState.partThree} type="text" name='partThree' placeholder='Pinch One'/>
+                    <textarea onChange={handleChange} value={outlineState.partFour} type="text" name='partFour' placeholder='Midpoint'/>
+                    <textarea onChange={handleChange} value={outlineState.partFive} type="text" name='partFive' placeholder='Pinch Two'/>
+                    <textarea onChange={handleChange} value={outlineState.partSix} type="text" name='partSix' placeholder='Plot Twist Two'/>
+                    <textarea onChange={handleChange} value={outlineState.partSeven} type="text" name='partSeven' placeholder='Resolution'/>
+                    <div className='addOutlineButton'>
+                        <button>Submit</button>
+                    </div>
+                </>
+                :
+                <>
+                    <input onChange={handleChange} value={outlineState.title} type="text" name='title' placeholder='Title'/>
+                    <textarea onChange={handleChange} value={outlineState.partOne} type="text" name='partOne' placeholder='Act One'/>
+                    <textarea onChange={handleChange} value={outlineState.partTwo} type="text" name='partTwo' placeholder='Act Two'/>
+                    <textarea onChange={handleChange} value={outlineState.partThree} type="text" name='partThree' placeholder='Act Three'/>
+                    <div className='addOutlineButton'>
+                        <button>Submit</button>
+                    </div>
+                </>
+                }
             </form>
         </div>
     )

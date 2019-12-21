@@ -175,14 +175,16 @@ function AddStoryForm(props) {
                 </form>
                 :
                 <form onSubmit={handleSubmit} className='storyEdit' >
-                    <h2>Edit Story</h2>
+                    <h2>{props.story.title}</h2>
                     {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
+                    Title
                     <input 
                         name='title'
                         value={storyState.title}
                         onChange={handleChange}
                         placeholder='Title'
                         type="text"/>
+                    Summary
                     <input 
                         name='summary'
                         value={storyState.summary}

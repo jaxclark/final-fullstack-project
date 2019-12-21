@@ -148,73 +148,86 @@ function SingleStory(props) {
     //     <div>{key === 'title' && value}</div>
     // )
     const genreArray = singleStory.genre
-    const mappedGenres = genreArray && genreArray.map(item => {
-        for(let i = 0; i < genreArray.length; i++) {
-            return <div>{item}</div>
-        }
-    })
+    // const mappedGenres = genreArray && genreArray.map(item => {
+    //     for(let i = 0; i < genreArray.length; i++) {
+    //         return <p>{item}</p>
+    //     }
+    // })
 
     return(
         <div className='singleStory'>
             <Menu />
             {toggled ? 
-            <>
-                <button onClick={() => addOutline(singleStory._id)}>Add Outline</button>
-                <button onClick={toggle}>Edit</button>
-                <button onClick={() => {deleteStory(singleStory._id)}}>Delete</button>
-            </>
-            :
-                <form>
-                    <input 
-                        name='title'
-                        onChange={handleChange} 
-                        value={storyState.title && storyState.title} 
-                        placeholder='Title'
-                        type="text"/>
-                    <input 
-                        name='summary'
-                        onChange={handleChange} 
-                        value={storyState.summary && storyState.summary} 
-                        placeholder='Summary'
-                        type="text"/>
+            <div className='singleStoryContainer'>
+                <div className='singleStoryInfo'>
+                    <h2>{singleStory.title}</h2>
+                    {genreArray && genreArray.map(genre => genre && <p className='singleStoryGenreP'>{genre}</p>)}
+                    {singleStory.summary && <p className='singleStorySummary'>{singleStory.summary}</p>}
+                </div>
+                <div className='singleStoryButtons'>
+                    <button onClick={() => addOutline(singleStory._id)}>Add Outline</button>
+                    <button onClick={toggle}>Edit</button>
+                    <button onClick={() => {deleteStory(singleStory._id)}}>Delete</button>
+                </div>
+            </div>
+                :
+            <div className='singleStoryContainer'>
+                <div className='singleStoryInfo'>
+                    <h2>{singleStory.title}</h2>
+                </div>
+                    <form className='storyEdit'>
+                        Title
+                        <input 
+                            name='title'
+                            onChange={handleChange} 
+                            value={storyState.title && storyState.title} 
+                            placeholder='Title'
+                            type="text"/>
+                        Summary
+                        <input 
+                            name='summary'
+                            onChange={handleChange} 
+                            value={storyState.summary && storyState.summary} 
+                            placeholder='Summary'
+                            type="text"/>
+                    <div className='storyEditButtons'>
                         <button type='button' onClick={deleteGenres} >Delete Genres</button>
-                    <button type='button' onClick={toggleGenres} >Add Genre</button>
-                    { toggleGenreButtons ? 
-                        <div>
-                            <button type='button' name='genre' value='Crime' onClick={handleGenre} >Crime</button>
-                            <button type='button' name='genre' value='Mystery' onClick={handleGenre} >Mystery</button>
-                            <button type='button' name='genre' value='Fantasy' onClick={handleGenre} >Fantasy</button>
-                            <button type='button' name='genre' value='Romance' onClick={handleGenre} >Romance</button>
-                            <button type='button' name='genre' value='Science Fiction' onClick={handleGenre} >Science Fiction</button>
-                            <button type='button' name='genre' value='Western' onClick={handleGenre} >Western</button>
-                            <button type='button' name='genre' value='Horror' onClick={handleGenre} >Horror</button>
-                            <button type='button' name='genre' value='Inspirational' onClick={handleGenre} >Inspirational</button>
-                            <button type='button' name='genre' value='Non-Fiction' onClick={handleGenre} >Non-Fiction</button>
-                            <button type='button' name='genre' value='Biography' onClick={handleGenre} >Biography</button>
-                        { toggleOtherGenre ?
-                            <button type='button' name='genre' onClick={toggleOther} >Other</button>
-                        :
+                        <button type='button' onClick={toggleGenres} >Add Genre</button>
+                        { toggleGenreButtons ? 
                             <div>
-                                <input 
-                                    name='genre'
-                                    value={uniqueGenre}
-                                    onChange={handleUniqueGenre}
-                                    placeholder='Genre'
-                                    type="text"/>
-                                <button type='button' onClick={toggleOther} >Add Other</button>
+                                <button type='button' name='genre' value='Crime' onClick={handleGenre} >Crime</button>
+                                <button type='button' name='genre' value='Mystery' onClick={handleGenre} >Mystery</button>
+                                <button type='button' name='genre' value='Fantasy' onClick={handleGenre} >Fantasy</button>
+                                <button type='button' name='genre' value='Romance' onClick={handleGenre} >Romance</button>
+                                <button type='button' name='genre' value='Science Fiction' onClick={handleGenre} >Science Fiction</button>
+                                <button type='button' name='genre' value='Western' onClick={handleGenre} >Western</button>
+                                <button type='button' name='genre' value='Horror' onClick={handleGenre} >Horror</button>
+                                <button type='button' name='genre' value='Inspirational' onClick={handleGenre} >Inspirational</button>
+                                <button type='button' name='genre' value='Non-Fiction' onClick={handleGenre} >Non-Fiction</button>
+                                <button type='button' name='genre' value='Biography' onClick={handleGenre} >Biography</button>
+                            { toggleOtherGenre ?
+                                <button type='button' name='genre' onClick={toggleOther} >Other</button>
+                            :
+                                <div>
+                                    <input 
+                                        name='genre'
+                                        value={uniqueGenre}
+                                        onChange={handleUniqueGenre}
+                                        placeholder='Genre'
+                                        type="text"/>
+                                    <button type='button' onClick={toggleOther} >Add Other</button>
+                                </div>
+                            }
                             </div>
+                        :
+                            <></>
                         }
-                        </div>
-                    :
-                        <></>
-                    }
-                    <button onClick={handleSubmit}>Save</button>
-                    {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
-                </form>
+                        <button onClick={handleSubmit}>Save</button>
+                    </div>
+                        {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
+                    </form>
+            </div>
             }
-            <div>{singleStory.title}</div>
-            <div>{mappedGenres}</div>
-            <div>{singleStory.summary}</div>
         </div>
     )
 }

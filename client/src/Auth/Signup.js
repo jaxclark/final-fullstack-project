@@ -37,22 +37,24 @@ function Signup() {
     }
 
     return(
-        <div className="formDiv">
-            <form onSubmit={handleSubmit}>
-                <h3>Sign Up</h3>
-                <input
-                    onChange={handleChange}
-                    value={username}
-                    name="username"
-                    type="text"
-                    placeholder="Username"/>
-                <input
-                    onChange={handleChange}
-                    value={password}
-                    name="password"
-                    type="password"
-                    placeholder="Password"/>
-                <button type="submit">Create Account</button>
+        <div className="signup">
+            <form className='signupForm' onSubmit={handleSubmit}>
+                <div className='signupDiv'>
+                    <h2>Sign Up</h2>
+                    <input
+                        onChange={handleChange}
+                        value={username}
+                        name="username"
+                        type="text"
+                        placeholder="username"/>
+                    <input
+                        onChange={handleChange}
+                        value={password}
+                        name="password"
+                        type="password"
+                        placeholder="password"/>
+                    <button type="submit">Create Account</button>
+                </div>
             </form>
             {(errorMessage) && <p style={{color: 'red'}}>{errorMessage}</p>}
         </div>
