@@ -5,7 +5,7 @@ const OutlineNotesSchema = new Schema({
     body: String,
     story: {
         type: Schema.Types.ObjectId,
-        ref: 'Story',
+        ref: 'Outline',
         required: true
     }
 })
