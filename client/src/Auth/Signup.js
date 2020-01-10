@@ -38,6 +38,9 @@ function Signup() {
 
     return(
         <div className="signup">
+            <div className='authLogoDiv'>
+                <img className='authLogo' src="https://cdn.discordapp.com/attachments/632280517013930044/665311997021388830/combined_logo.png" alt="vertLogo"/>
+            </div>
             <form className='signupForm' onSubmit={handleSubmit}>
                 <div className='signupDiv'>
                     <h2>Sign Up</h2>

@@ -1,10 +1,21 @@
 @import "globals";
 
+.authLogo {
+    height: 100px;
+    width: auto;
+    padding: 10px;
+}
+
+.authLogoDiv {
+    display: grid;
+    justify-content: center;
+}
+
 .login {
     background-color: $primaryColor;
     height: 100%;
     min-height: ($totalVH - $navHeight);
-    padding: 40px 400px 10px 400px;
+    padding: 40px 20% 10px 20%;
     display: block;
     h2 {
         border-radius: 4px;
@@ -67,7 +78,7 @@
     background-color: $primaryColor;
     height: 100%;
     min-height: ($totalVH - $navHeight);
-    padding: 40px 400px 10px 400px;
+    padding: 40px 20% 10px 20%;
     display: block;
     h2 {
         border-radius: 4px;
