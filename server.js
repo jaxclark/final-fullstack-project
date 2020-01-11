@@ -4,10 +4,12 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 const expressJwt = require('express-jwt');
-const PORT = process.env.PORT || 7070
+const path = require('path')
+const PORT = process.env.PORT || 8000
 
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(express.static(path.join(__dirname, "client", "build")))
 
 app.use('/writer', expressJwt({ secret: process.env.SECRET }));
 app.use('/auth', require('./routes/auth'));
@@ -22,7 +24,7 @@ app.use((err, req, res, next) => {
     return res.send({ message: err.message })
 });
 
-mongoose.connect('mongodb://localhost:27017/writers-app', 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/writers-app', 
     { 
         useNewUrlParser: true, 
         useUnifiedTopology: true, 
@@ -35,6 +37,9 @@ mongoose.connect('mongodb://localhost:27017/writers-app',
     }
 );
 
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.listen(PORT, () => {
     console.log(`[+] Starting server on port ${PORT}`)
 });
